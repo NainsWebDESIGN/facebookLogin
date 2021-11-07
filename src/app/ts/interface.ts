@@ -1,5 +1,5 @@
 /** 驗證完取得的AccessToken */
-export interface LineResponse {
+export interface FacebookResponse {
     // 存取伺服器驗證用的token
     access_token: string,
     // token的種類
@@ -13,10 +13,10 @@ export interface LineResponse {
     // 需透過id_token來得知使用者是誰
     id_token: string
 }
-/** 傳給Line的參數 */
-export interface LineToken {
+/** 傳給Facebook的參數 */
+export interface FacebookToken {
     // (必填)
-    // 告訴Line要回應authorization code
+    // 告訴Facebook要回應authorization code
     response_type: string,
     // 頻道ID
     client_id: string,
@@ -33,13 +33,13 @@ export interface LineToken {
     prompt: string,
     // 登入的有效時間(單位:秒)，會反映在IDtoken解析後的內容
     max_age: string,
-    // Line登入的頁面語言
+    // Facebook登入的頁面語言
     ui_locales: string,
     // 有加入chatbot的話要在權限列表一起顯示normal或是分開顯示aggressive
     bot_prompt: string
 }
 /** 將得到的code拿去post驗證 */
-export interface PostLine {
+export interface PostFacebook {
     // 授權的型態(目前官方只有這個)
     grant_type: string,
     // 傳回來的驗證碼
@@ -51,15 +51,15 @@ export interface PostLine {
     // 頻道密鑰
     client_secret: string
 }
-/** 各種Line的網址或api */
-export interface LineHref {
-    // 傳送給line aouth取得驗證碼的網址
+/** 各種Facebook的網址或api */
+export interface FacebookHref {
+    // 傳送給Facebook aouth取得驗證碼的網址
     URL: string,
-    // 呼叫line API的網址
+    // 呼叫Facebook API的網址
     API: string
 }
 // id_token解析後的格式
-export interface JwtLineToken {
+export interface JwtFacebookToken {
     // 簽發者
     iss: string,
     // 代表方
@@ -72,7 +72,7 @@ export interface JwtLineToken {
     iat: string,
     // 防止重複攻擊，再登入時給的參數nonce
     nonce: string,
-    // 登入方式(pwd 帳號密碼登入, lineqr 用QR code登入, linesso 用以存在的帳密登入，意即曾登入過)
+    // 登入方式(pwd 帳號密碼登入, Facebookqr 用QR code登入, Facebooksso 用以存在的帳密登入，意即曾登入過)
     amr: string[],
     // 帳號名稱
     name: string,

@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
-import { lineHref, postLine } from '@ts/lineLogin';
-import { LineResponse } from '@ts/interface';
+import { facebookHref, postFacebook } from '@ts/FacebookLogin';
+import { FacebookResponse } from '@ts/interface';
 import { HttpClient, HttpErrorResponse, HttpResponse, HttpHeaders } from '@angular/common/http';
 import { Observable } from 'rxjs/Observable';
 import 'rxjs/add/operator/map';
@@ -10,7 +10,7 @@ import 'rxjs/add/observable/throw';
 export class ApiService {
 
     constructor(private http: HttpClient) { }
-    LineLogin(): Observable<any> {
+    FacebookLogin(): Observable<any> {
         let loginStatus = [];
         location.search.split("&").forEach(item => {
             let data = item.split("=");
@@ -23,11 +23,11 @@ export class ApiService {
                 return Observable.throw("Not Login!");
             default:
                 const header = { headers: new HttpHeaders().set('Content-Type', 'application/x-www-form-urlencoded') };
-                postLine.code = loginStatus[index].value;
-                let data = this.PostXform(postLine);
+                postFacebook.code = loginStatus[index].value;
+                let data = this.PostXform(postFacebook);
 
-                return this.http.post(lineHref.API, data.toString(), header).map(
-                    (data: HttpResponse<LineResponse>) => data,
+                return this.http.post(facebookHref.API, data.toString(), header).map(
+                    (data: HttpResponse<FacebookResponse>) => data,
                     (err: HttpErrorResponse) => Observable.throw(err)
                 )
         }

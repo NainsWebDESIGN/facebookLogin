@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ApiService } from '@service';
-import { lineToken, lineHref } from '@ts/lineLogin';
-import { LineResponse, JwtLineToken } from '@ts/interface';
+import { facebookToken, facebookHref } from '@ts/FacebookLogin';
+import { FacebookResponse, JwtFacebookToken } from '@ts/interface';
 import { JwtHelperService } from "@auth0/angular-jwt";
 
 @Component({
@@ -10,17 +10,18 @@ import { JwtHelperService } from "@auth0/angular-jwt";
   styleUrls: ['./app.component.css']
 })
 export class AppComponent implements OnInit {
-  linehref: string;
-  Acces_Token: LineResponse;
+  Facebookhref: string;
+  Acces_Token: FacebookResponse;
   constructor(private api: ApiService) { }
   ngOnInit() {
-    let box = [], line = Object.keys(lineToken);
-    box = line.map(item => `${item}=${lineToken[item]}`);
-    this.linehref = lineHref.URL + box.join("&");
-    this.api.LineLogin().subscribe(
-      data => this.Acces_Token = data,
-      err => console.log(err),
-      () => console.log(`Acces_Token is Get!`, new JwtHelperService().decodeToken(this.Acces_Token.id_token) as JwtLineToken)
-    );
+    let box = [], Facebook = Object.keys(facebookToken);
+    box = Facebook.map(item => `${item}=${facebookToken[item]}`);
+    this.Facebookhref = facebookHref.URL + box.join("&");
+    console.log(this.Facebookhref);
+    // this.api.FacebookLogin().subscribe(
+    //   data => this.Acces_Token = data,
+    //   err => console.log(err),
+    //   () => console.log(`Acces_Token is Get!`, new JwtHelperService().decodeToken(this.Acces_Token.id_token) as JwtFacebookToken)
+    // );
   }
 }
