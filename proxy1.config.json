@@ -1,0 +1,7 @@
+{
+  "/oauth2": {
+    "target": "https://api.line.me/",
+    "secure": false,
+    "changeOrigin": true
+  }
+}
